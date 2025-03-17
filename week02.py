@@ -1,14 +1,20 @@
 # alt + shift + F10
+import random
 
-n = int(input("정수 입력 : "))
-result = 0
-i = 1
+answer = random.randint(1, 1000)
+win = False
 
-result = n * (n + 1) // 2 #O(1)
-print(result)
+for guesses in range(10):
+    print(f"{10 - guesses}LIFE LEFT | NUMBER : ", end = '')
+    guess = int(input())
 
+    if answer == guess:
+         print("WIN")
+         win = True
+         break
 
+    elif answer > guess:
+        print("LOW")
 
-
-
-
+    elif answer < guess:
+        print("HIGH")
