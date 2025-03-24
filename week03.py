@@ -1,14 +1,8 @@
-import array
+groups = ['HOT', 'SEVENTEEN', 'BLACKPINK', 'NJZ']
+ratings = [1, 2, 4, 3, 100]
 
-arr = array.array('f',[99, 8, -7, 0, 16])
-
-for i in range(len(arr)):
-    print(f"{arr[i]:3} {id(arr[i])}")
-
-
-
-
-
+group_rating = list(zip(groups, ratings))
+print(group_rating)
 
 
 
