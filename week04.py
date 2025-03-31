@@ -1,17 +1,34 @@
+class Node:
+    def __init__(self, data, next = None):
+        self.data = data
+        self.next = next
+
+class LinkedList:
+    def __init__(self):
+        self.head = None
+
+    def append(self, data):
+        if not self.head:
+            self.head = Node(data)
+            return
+        current = self.head
+        while current.link:
+            current = current.link
+        current.link = Node(data)
+
+    def __str__(self):
+        current = self.head
+        while current is not None:
+            # print(current.data)
+            result = result + str(current.data) + " -> "
+            current = current.link
+        return "END"
+        # return "Linked list!"
 
 
-def append(self, data):
-    if not self.head:
-        self.head = Node(data)
-        return
-    current = self.head
-    while current.link:
-        current = current.link
-    current.link = Node(data)
+ll = LinkedList()
+ll.append(8)
+ll.append(10)
+ll.append(-9)
 
-
-
-li = linkedList()
-li.append(8)
-li.append(10)
-li.append(-9)
+print(ll)
