@@ -1,3 +1,7 @@
+import random
+from traceback import print_tb
+
+
 class Node:
     def __init__(self, data, next = None):
         self.data = data
@@ -31,15 +35,22 @@ class LinkedList:
         while current is not None:
             result = result + f"{current.data} -> "
             current = current.link
-        return "END"
+        return result + "END"
         # return "Linked list!"
 
-
 ll = LinkedList()
-ll.append(8)
-ll.append(10)
-ll.append(-9)
-
+for _ in range(0, 20):
+    ll.append(random.randint(1, 20))
 print(ll)
-print(ll.search(99))
 print(ll.search(10))
+
+
+
+# ll = LinkedList()
+# ll.append(8)
+# ll.append(10)
+# ll.append(-9)
+
+# print(ll)
+# print(ll.search(99))
+# print(ll.search(10))
