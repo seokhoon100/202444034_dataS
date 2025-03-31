@@ -40,12 +40,12 @@ class LinkedList:
 
     def search(self, target):
         current = self.head
-        while current.next:
+        while current: # bug fix
             if target == current.data:
                 return f"{target}을(를) 찾았습니다!"
             else:
-                current = current.next
-        current.link = Node(target)
+                current = current.link
+        return f"{target}은 링크드 리스트 안에 존재하지 않습니다."
 
 
     def __str__(self):
@@ -53,7 +53,7 @@ class LinkedList:
         result = ""
         while current is not None:
             result = result + f"{current.data} -> "
-            current = current.next
+            current = current.link
         return result + "END"
 
 
@@ -61,11 +61,11 @@ ll = LinkedList()
 ll.append(8)
 ll.append(10)
 ll.append(-9)
-
-
 print(ll)
+
 print(ll.search(99))
-print(ll.search(10))
-ll.remove(8)
+print(ll.search(-9))
+ll.remove(10)
+ll.remove(77)
 print(ll)
 
