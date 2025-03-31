@@ -17,7 +17,7 @@ class LinkedList:
             self.head = Node(data)
             return
         current = self.head
-        while current.next:
+        while current.link:
             current = current.link
         current.link = Node(data)
 
@@ -52,7 +52,7 @@ class LinkedList:
         current = self.head
         result = ""
         while current is not None:
-            result = result + f"{current.data} -> "
+            result += f"{current.data} -> "
             current = current.link
         return result + "END"
 
