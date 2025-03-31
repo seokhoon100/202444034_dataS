@@ -3,9 +3,9 @@ from traceback import print_tb
 
 
 class Node:
-    def __init__(self, data, next = None):
+    def __init__(self, data, link = None):
         self.data = data
-        self.next = next
+        self.link = link
 
 class LinkedList:
     def __init__(self):
