@@ -1,17 +1,20 @@
 
 def is_valid_parentheses(expression : str) -> bool:
     stack = list()
+    brackets = {']': '[', '}': '{', ')': '('}
     for letter in expression:
-        if letter == "(":
+        if letter in brackets.values():
             stack.append(letter)
-        if letter == ")":
-            if len(stack) == 0:
+        if letter in brackets.keys():
+            if not stack or stack.pop() != brackets[letter]:
                 return False
-            else:
-                stack.pop()
 
-    return len(stack) == 0
+    return not stack
 
+
+print(is_valid_parentheses("[01+2])"))
+print(is_valid_parentheses("{1+2}"))
+print(is_valid_parentheses("[3*2)/2]"))
 print(is_valid_parentheses("(1+2))"))
 print(is_valid_parentheses("(1+2)"))
 print(is_valid_parentheses("(3*2)/2)"))
