@@ -26,3 +26,5 @@ q = Queue()
 q.enqueue("Data structure")
 q.enqueue("Database")
 print(q._size, q.front.data, q.rear.data)
+
+
