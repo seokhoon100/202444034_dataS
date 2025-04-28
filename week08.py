@@ -4,58 +4,65 @@ class TreeNode:
 		self.data = None
 		self.right = None
 
-def pre_order(node):
-    if node is None:
-        return
-    print(node.data, end="->")
-    pre_order(node.left)
-    pre_order(node.right)
+    def pre_order(node):
+        if node is None:
+            return
+
+        print(node.data, end="->")
+        pre_order(node.left)
+        pre_order(node.right)
 
 
-def in_order(node):
-    if node is None:
-        return
-    in_order(node.left)
-    print(node.data, end="->")
-    in_order(node.right)
+    def in_order(node):
+        if node is None:
+            return
+
+        in_order(node.left)
+        print(node.data, end="->")
+        in_order(node.right)
 
 
-def post_order(node):
-    if node is None:
-        return
-    post_order(node.left)
-    post_order(node.right)
-    print(node.data, end="->")
+    def post_order(node):
+        if node is None:
+            return
+
+        post_order(node.left)
+        post_order(node.right)
+        print(node.data, end="->")
 
 
-node1 = TreeNode()
-node1.data = 'hs'
+    class TreeNode:
 
-node2 = TreeNode()
-node2.data = 'sl'
-node1.left = node2
 
-node3 = TreeNode()
-node3.data = 'mb'
-node1.right = node3
 
-node4 = TreeNode()
-node4.data = 'hw'
-node2.left = node4
+    if __names__ == "__main__":
+        numbers = [10, 15, 8, 3, 9]
+        root = Node
 
-node5 = TreeNode()
-node5.data = 'zz'
-node2.right = node5
+        node = TreeNode()
+        node.data = numbers[0]
+        root = node
 
-node6 = TreeNode()
-node6.data = 'sm'
-node3.left = node6
+        for number in numbers[1:]:
+            node = TreeNode()
+            node.data = number
+            current = root
+            while True:
+                if number < current.data:
+                    if current.left is None:
+                        current.left = node
+                        break
 
-# print(node6.data)
-# print(node1.right.left.data)
+                    current = current.left  # 이동
 
-post_order(node1)
-print()
-pre_order(node1)
-print()
-in_order(node1)
+                else:
+                    if current.right is None:
+                        current.right = node
+                        break
+
+                    current = current.right  # 이동
+
+
+        print("BST 구성 완료")
+
+        pre_order(root)
