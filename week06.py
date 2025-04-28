@@ -25,4 +25,10 @@ class Queue:
 q = Queue()
 q.enqueue("Data structure")
 q.enqueue("Database")
+<<<<<<< HEAD
 print(q._size, q.front.data, q.rear.data)
+=======
+print(q._size, q.front.data, q.rear.data)
+
+
+>>>>>>> 1cabd55ee7a1774fe12053f15936e4e466ffdda5
