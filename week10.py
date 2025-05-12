@@ -3,7 +3,7 @@
 def pre_order(node):
     if node is None:
         return
-    print(node.data, end="->")
+    print(node.data, end = " -> ")
     pre_order(node.left)
     pre_order(node.right)
 
@@ -12,7 +12,7 @@ def in_order(node):
     if node is None:
         return
     in_order(node.left)
-    print(node.data, end="->")
+    print(node.data, end = " -> ")
     in_order(node.right)
 
 
@@ -21,22 +21,25 @@ def post_order(node):
         return
     post_order(node.left)
     post_order(node.right)
-    print(node.data, end="->")
+    print(node.data, end = " -> ")
 
 
 def search(find_number):
     current = root
     while True:
         if find_number == current.data:
+            return True
             print(f"{find_number}을(를) 찾았습니다")
             break
         elif find_number < current.data:
             if current.left is None:
+                return False
                 print(f"{find_number}이(가) 존재하지 않습니다")
                 break
             current = current.left
         else:
             if current.right is None:
+                return False
                 print(f"{find_number}이(가) 존재하지 않습니다")
                 break
             current = current.right
@@ -82,4 +85,7 @@ if __name__ == "__main__":
     post_order(root)
     print()
     find_number = int(input("찾는 수는? : "))
-    search(find_number)
+    if search(find_number):
+        print(f"{find_number}을(를) 찾았습니다")
+    else:
+        print(f"{find_number}이(가) 존재하지 않습니다")
