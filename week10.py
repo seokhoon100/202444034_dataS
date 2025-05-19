@@ -48,54 +48,61 @@ def search(find_number):
 
 
 class TreeNode:
-	def __init__(self):
-		self.left = None
-		self.data = None
-		self.right = None
+    def __init__(self):
+        self.left = None
+        self.data = None
+        self.right = None
 
 
-def insert(root, value):
-    node = TreeNode()
-    node.data = value
+    def insert(root, value):
+        node = TreeNode()
+        node.data = value
 
-    if root is None:
+        if root is None:
+            return node
+
+        current = node
+
+        while True:
+            if value < current.data:
+                if current.left is None:
+                    current.left = node
+                    break
+                current = current.left  # 이동
+            else:
+                if current.right is None:
+                    current.right = node
+                    break
+                current = current.right  # 이동
+        return root
+
+
+    def delete(node, value):
+        if node is None:
+            return None
+
+        if value < node.data:
+            node.left = delete(node.left, value)
+
+        elif value > node.data:
+            node.right = delete(node.right, value)
+
+        else:   # 같은 경우. 삭제할 노드를 찾음
+            # leaf 노드거나 자식이 1개 인 경우의 노드를 삭제
+            if node.left is None:
+                return node.right
+
+            elif node.right is None:
+                return node.left
+
+            # 자식이 2개인 노드를 삭제
+            max_smaller_node = node.left
+            while max_smaller_node.right:
+                max_smaller_node = max_smaller_node.right  # move
+            node.data = max_smaller_node.data
+            node.left = delete(node.left, max_smaller_node.data)
+
         return node
-
-    current = node
-
-    while True:
-        if value < current.data:
-            if current.left is None:
-                current.left = node
-                break
-            current = current.left  # 이동
-        else:
-            if current.right is None:
-                current.right = node
-                break
-            current = current.right  # 이동
-    return root
-
-
-def delete(node, value):
-    if node is None:
-        return None
-
-    if value < node.data:
-        node.left = delete(node.left, value)
-
-    elif value > node.data:
-        node.right = delete(node.right, value)
-
-    else:   # 같은 경우. 삭제할 노드를 찾음
-        # leaf 노드거나 자식이 1개 인 경우의 노드를 삭제
-        if node.left is None:
-            return node.right
-
-        elif node.right is None:
-            return node.left
-
-
 
 
 if __name__ == "__main__":
