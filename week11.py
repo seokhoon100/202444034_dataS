@@ -148,6 +148,7 @@ def dfs(g, i, visited):
 
 def bfs(g, i, visited):
     pass
+# 크루스칼 알고리즘
 
 visited_dfs = [False for _ in range(len(graph))]
 visited_bfs = [0 for _ in range(len(graph))]
