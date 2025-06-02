@@ -2,26 +2,6 @@ class Graph:
 	def __init__ (self, size):
 		self.graph = [[0 for _ in range(size)] for _ in range(size)]
 
-
-class DisjointSet:  # 크루스칼 알고리즘을 위한 유틸리티 클래스
-    def __init__(self, n):
-        self.parent = [i for i in range(n)]
-
-    def find(self, x):
-        if self.parent[x] != x:
-            self.parent[x] = self.find(self.parent[x])
-        return self.parent[x]
-
-    def merge(self, x, y):
-        x_root = self.find(x)
-        y_root = self.find(y)
-
-        if x_root != y_root:
-            self.parent[y_root] = x_root
-            return True
-        return False
-
-
 def print_graph(g) :
 	print(' ', end = ' ')
 	for v in range(len(g.graph)) :
@@ -33,6 +13,36 @@ def print_graph(g) :
 			print(f"{g.graph[row][col]:2d}", end=' ')
 		print()
 	print()
+
+def find_vertex(g, city) :
+	stack = list()
+	visited_cities = list()
+
+	i = 0
+	stack.append(i)
+	visited_cities.append(i)
+
+	while stack:
+		next = None
+		for j in range(graph_size):
+			if g.graph[i][j] != 0:
+				if j in visited_cities:
+					pass
+				else:
+					next = j
+					break
+
+		if next is not None:
+			i = next
+			stack.append(i)
+			visited_cities.append(i)
+		else :
+			i = stack.pop()
+
+	if city in visited_cities:
+		return True
+	else :
+		return False
 
 
 g1 = None
@@ -49,7 +59,7 @@ g1.graph[daejeon][seoul] = 11; g1.graph[daejeon][gangneung] = 12; g1.graph[daeje
 g1.graph[gwangju][seoul] = 55; g1.graph[gwangju][daejeon] = 20; g1.graph[gwangju][busan] = 28
 g1.graph[busan][daejeon] = 30; g1.graph[busan][gwangju] = 28
 
-print("도시 간 도로 건설을 위한 전체 연결도")
+print('도시 간 도로 건설을 위한 전체 연결도')
 print_graph(g1)
 
 edges = list()
@@ -59,29 +69,41 @@ for i in range(graph_size) :
 			edges.append([g1.graph[i][j], i, j])
 print(edges)
 
-edges.sort(reverse=False)  # 오름차순
+edges.sort(reverse=True)
 print(edges)
 
-ds = DisjointSet(graph_size)
-mst_edges = list()
-mst_cost = 0
+new_ary = list()
+for i in range(1, len(edges), 2):
+	new_ary.append(edges[i])
+print(new_ary)
 
-for cost, s, e in edges:
-    if ds.merge(s, e):
-        mst_edges.append((cost, s, e))  # 최소 간선 추가
-        mst_cost = mst_cost + cost  # 최소 비용 업데이트
+index = 0
+while len(new_ary) > graph_size - 1:
+	start = new_ary[index][1]
+	end = new_ary[index][2]
+	save_cost = new_ary[index][0]
 
+	g1.graph[start][end] = 0
+	g1.graph[end][start] = 0
 
-mst_graph = Graph(graph_size)
-for cost, s, e in mst_edges:
-    mst_graph.graph[s][e] = cost
-    mst_graph.graph[e][s] = cost
+	start_reachable = find_vertex(g1, start)
+	end_reachable = find_vertex(g1, end)
 
+	if start_reachable and end_reachable :
+		del new_ary[index]
+	else:
+		g1.graph[start][end] = save_cost
+		g1.graph[end][start] = save_cost
+		index = index + 1
 
-print("최소 비용의 도로 연결도")
-print_graph(mst_graph)
-print(f"최소 비용 :  {mst_cost}")
+print('MST 도로 연결도')
+print_graph(g1)
 
-print("\n최소 간선 목록")
-for cost, s, e in mst_edges:
-    print(f"{cities[s]} --- {cities[e]} : {cost}")
+total_cost = 0
+for i in range(graph_size):
+	for j in range(graph_size):
+		if g1.graph[i][j] != 0:
+			total_cost = total_cost + g1.graph[i][j]
+
+total_cost = total_cost // 2
+print(f"최소 비용 :  {total_cost}")
