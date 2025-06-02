@@ -165,7 +165,7 @@ def bfs(g, i, visited):
             if g[i][j] == 1 and not visited[j]:
                 queue.append(j)
                 visited[j] + 1
-# 크루스칼 알고리즘
+# 크루스컬 알고리즘
 
 visited_dfs = [False for _ in range(len(graph))]
 visited_bfs = [0 for _ in range(len(graph))]
